@@ -1,0 +1,36 @@
+.login-top {
+  height: 400rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40rpx 0 0 40rpx;
+  background: #1989fa;
+  color: #fff;
+}
+.login-top::after {
+  content: '';
+  display: block;
+  width: 280rpx;
+  height: 280rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 50rpx;
+  background-image: url('https://img.imgdb.cn/item/608a5d48d1a9ae528fefc4eb.png');
+  background-size: 100% 100%;
+}
+.login-top text {
+  font-size: 48rpx;
+}
+.login-bottom {
+  background: #fff;
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: -60rpx;
+  position: relative;
+  border-radius: 20rpx;
+  z-index: 2;
+}
+.login-bottom .inner {
+  padding: 0 20rpx;
+}

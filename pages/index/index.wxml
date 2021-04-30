@@ -1,0 +1,32 @@
+<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
+
+<!-- 自定义navigation -->
+<view class="search-bar" style="padding-top: {{barTop}}px; height: {{barHeight}}px">
+  <van-icon name="search" />
+  <view class="input" style="border-radius: {{barHeight/2}}px">搜索商品</view>
+</view>
+
+<!-- 轮播图 -->
+<swiper class="index-swiper" autoplay indicator-dots circular>
+  <swiper-item wx:for="{{swiperList}}" wx:key="id">
+    <image src="{{utils.realSrc(item.cover)}}" />
+  </swiper-item>
+</swiper>
+
+<!-- 中间导航 -->
+<view class="index-nav">
+  <view wx:for="{{navList}}" wx:key="id">
+    <image src="{{utils.realSrc(item.cover)}}" />
+    <text>{{item.title}}</text>
+  </view>
+</view>
+
+<!-- 流动通知 -->
+<swiper class="index-notice" vertical autoplay>
+  <swiper-item wx:for="{{noticeList}}" wx:key="id">
+    <view>
+      <van-icon name="volume-o" />
+      {{item.title}}
+    </view>
+  </swiper-item>
+</swiper>
