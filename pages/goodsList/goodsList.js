@@ -1,66 +1,82 @@
-// pages/goodsList/goodsList.js
+import { getGoodsList } from '../../utils/api'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    keyword: '',
+    page: 1,
+    cate_id: '',
+    isHidden: true,
+    history: [],
+    hotSearch: [],
+    selectType: 1,
+    select: [
+      { text: '综合', value: 1 },
+      { text: '价格升序', value: 2 },
+      { text: '价格降序', value: 3 },
+    ],
+    nextPage: true,
+    goodsList: []
+  },
+  onLoad(payload){
+    const cate_id = payload.id || ''
+    const history = wx.getStorageSync('history') || []
+    const hotSearch = wx.getStorageSync('hotSearch') || []
+    this.setData({
+      history,
+      hotSearch,
+      cate_id
+    })
+    this.getGoodsList()
+  },
+  onReachBottom(){
+    if(!this.data.nextPage) return
+    this.setData({
+      page: this.data.page + 1
+    })
+    this.getGoodsList()
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onChange(ev){
+    this.setData({
+      keyword: ev.detail
+    })
+  },
+  onShowSearch(){
+    this.setData({
+      isHidden: false
+    })
+  },
+  onSearch(){
+    const history = this.data.history
+    if(!this.data.keyword) return
+    if(!this.data.history.includes(this.data.keyword)){
+      history.unshift(this.data.keyword)
+      wx.setStorageSync('history', history)
+      this.setData({history})
+    }
+    this.setData({isHidden:true})
+    this.resetParams()
+    this.getGoodsList()
+  },
+  resetParams(){
+    this.setData({
+      goodsList: [],
+      page: 1,
+      nextPage: true
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getGoodsList(){
+    const { keyword, cate_id, page } = this.data
+    getGoodsList({keyword, cate_id, page}).then(res=>{
+      this.setData({
+        goodsList: [...this.data.goodsList,...res.data]
+      })
+      if(res.data.length < 12){
+        this.setData({
+          nextPage: false
+        })
+      }
+    })
   }
 })

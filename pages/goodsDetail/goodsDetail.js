@@ -1,66 +1,66 @@
-// pages/goodsDetail/goodsDetail.js
+import { getGoodsDetail, addCart, getCartNum } from '../../utils/api'
+import { getStore, setStore, switchTab } from '../../utils/index'
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    detail: {},
+    popupOption: false,
+    popupAttr: false,
+    popupTag: false,
+    cartNum: 0
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad(payload){
+    const id = payload.id
+    getGoodsDetail(id).then(res=>{
+      res.data.intro = res.data.intro.replace('<img ', '<img style="width:100%;" ')
+      this.setData({
+        detail: res.data,
+        cartNum: getStore('cart')
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toCart(){
+    switchTab('/pages/cart/cart')
+  },
+  onshowPopup(ev){
+    const { type } = ev.currentTarget.dataset
+    this.setData({
+      [`popup${type}`]: true
+    })
+  },
+  onClosePopup(ev){
+    const { type } = ev.currentTarget.dataset
+    this.setData({
+      [`popup${type}`]: false
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onSubmit(ev){
+    this.setData({
+      popupOption: false
+    })
+    const { sku_id, num, type } = ev.detail
+    const params = {
+      sku_id,
+      num
+    }
+    if(type == 'cart'){
+      this.addCart(params)
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // api相关方法
+  addCart(params){
+    addCart(params).then(res=>{
+      getCartNum().then(res=>{
+        setStore('cart',res.data)
+        this.setData({
+          cartNum: res.data
+        })
+      })
+    })
   }
 })

@@ -1,5 +1,5 @@
 var realSrc=function(src) {
-   return src.replace('http://www.pride.demo.com', 'https://pridewu.cn1.utools.club')
+  return src ? src.replace('http://www.pride.demo.com', 'https://pridewu.cn1.utools.club') : ''
 }
 
 module.exports={

@@ -1,2 +1,110 @@
-<!--pages/goodsDetail/goodsDetail.wxml-->
-<text>pages/goodsDetail/goodsDetail.wxml</text>
+<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
+
+<!-- 轮播图 -->
+<swiper class="goods-swiper" autoplay indicator-dots circular>
+  <swiper-item wx:for="{{detail.covers}}" wx:key="*this">
+    <image src="{{utils.realSrc(item)}}" />
+  </swiper-item>
+</swiper>
+
+<!-- 商品信息 -->
+<view class="goods-info">
+  <view class="title">
+    <text class="l">{{detail.name}}</text>
+    <view class="r gray">
+      <van-icon size="18" name="star-o" />
+      收藏
+    </view>
+  </view>
+  <view class="tips">
+    <view>
+      <text class="red">￥{{detail.price}}</text>
+      <text class="gray">￥{{detail.market_price}}</text>
+    </view>
+    <text class="gray">月销：{{detail.total_sales}}</text>
+  </view>
+
+  <view class="cell" data-type="Option" bindtap="onshowPopup">
+    <van-cell title="选择" is-link value="商品规格" />
+  </view>
+  <view class="cell">
+    <van-cell title="优惠券" is-link value="领取优惠券" />
+  </view>
+  <view class="cell" hidden="{{!detail.tags.length}}" data-type="Tag" bindtap="onshowPopup">
+    <van-cell title="服务" is-link value="{{detail.tags[0]}}" />
+  </view>
+  <view class="cell" hidden="{{!detail.attributeValue.length}}" data-type="Attr" bindtap="onshowPopup">
+    <van-cell title="参数" is-link value="{{detail.attributeValue[0].value}}" />
+  </view>
+
+  <view class="cell cell-score">
+    <van-cell title="评价" is-link value="好评率 100%" />
+  </view>
+
+  <van-divider
+    contentPosition="center"
+    customStyle="color: gray; border-color: gray;"
+  >
+    商品详情
+  </van-divider>
+  <view class="detail">
+    <rich-text nodes="{{utils.realSrc(detail.intro)}}"></rich-text>
+  </view>
+</view>
+
+<van-goods-action class="goods-action">
+  <van-goods-action-icon icon="chat-o" text="客服" />
+  <van-goods-action-icon icon="cart-o" text="购物车" info="{{cartNum==0?'':cartNum}}" bind:click="toCart" />
+  <van-goods-action-button text="加入购物车" type="warning" bind:click="onshowPopup" data-type="Option" />
+  <van-goods-action-button text="立即购买" bind:click="onshowPopup" data-type="Option" />
+</van-goods-action>
+
+<van-popup
+  wx:if="{{detail.attributeValue.length}}"
+  show="{{popupAttr}}"
+  position="bottom"
+  bind:close="onClosePopup"
+  data-type="Attr"
+>
+  <view class="goods-popup">
+    <view
+      wx:for="{{detail.attributeValue}}"
+      wx:key="id"
+    >
+      <text>{{item.title}}:</text>
+      <text>{{item.value}}:</text>
+    </view>
+  </view>
+</van-popup>
+
+<van-popup
+  wx:if="{{detail.tags.length}}"
+  show="{{popupTag}}"
+  position="bottom"
+  bind:close="onClosePopup"
+  data-type="Tag"
+>
+  <view class="goods-popup">
+    <view
+      wx:for="{{detail.tags}}"
+      wx:key="id"
+    >
+      <text>{{item}}</text>
+    </view>
+  </view>
+</van-popup>
+
+<van-popup
+  show="{{popupOption}}"
+  position="bottom"
+  round
+  bind:close="onClosePopup"
+  data-type="Option"
+>
+  <sku
+    sku="{{detail}}"
+    bindonSubmit="onSubmit"
+    data-type="Option"
+    bindonClose="onClosePopup"
+  />
+</van-popup>

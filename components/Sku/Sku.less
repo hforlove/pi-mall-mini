@@ -1,0 +1,90 @@
+.goods-sku{
+  position: relative;
+  padding: 32rpx;
+  .close{
+    position: absolute;
+    right: 32rpx;
+    top: 32rpx;
+    color: gray;
+    font-size: 44rpx;
+  }
+  .top{
+    display: flex;
+    .img{
+      width: 180rpx;
+      height: 180rpx;
+    }
+    .info{
+      flex: 1;
+      padding: 24rpx 20rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .stock{
+        font-size: 24rpx;
+        color: gray;
+      }
+      .tips{
+        color: gray;
+        font-size: 24rpx;
+      }
+      .type{
+        color: gray;
+        font-size: 24rpx;
+        padding: 0 8rpx;
+      }
+      .price{
+        color: red;
+      }
+    }
+  }
+  .option{
+    padding-bottom: 20rpx;
+    .title{
+      padding: 20rpx 0;
+    }
+    .list{
+      display: flex;
+      flex-wrap: wrap;
+      .item{
+        font-size: 24rpx;
+        border-radius: 4rpx;
+        padding: 12rpx 20rpx;
+        margin: 6rpx 10rpx;
+      }
+      .act{
+        background-color: #fde7ea;
+        color: #FB0017;
+      }
+      .disabled{
+        color: #c8c9cc;
+      }
+    }
+  }
+  .count{
+    padding: 20rpx 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .bar{
+    padding-top: 20rpx;
+    display: flex;
+    justify-content: center;
+    .btn{
+      display: flex;
+      width: 340rpx;
+      height: 80rpx;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .join{
+      border-radius: 40rpx 0 0 40rpx;
+      background: linear-gradient(to right,#ffd01e,#ff8917);
+    }
+    .buy{
+      border-radius: 0 40rpx 40rpx 0;
+      background: linear-gradient(to right,#ff6034,#ee0a24);
+    }
+  }
+}

@@ -79,11 +79,11 @@ export function getBrand () {
 
 
 // 商品列表
-export function getGoodsList (params) {
+export function getGoodsList (data) {
   return request({
     method: 'get',
     url: '/product/product/index',
-    params
+    data
   })
 }
 
@@ -92,7 +92,7 @@ export function getGoodsDetail (id) {
   return request({
     method: 'get',
     url: '/product/product/view',
-    params:{id}
+    data:{id}
   })
 }
 
@@ -140,11 +140,11 @@ export function deleteCart (data) {
 }
 
 // 结算
-export function getOrderPreview (params) {
+export function getOrderPreview (data) {
   return request({
     method: 'get',
     url: '/order/order/preview',
-    params
+    data
   })
 }
 
@@ -158,11 +158,11 @@ export function createOrder (data) {
 }
 
 // 支付时的订单详情
-export function getOrderByPay (params) {
+export function getOrderByPay (data) {
   return request({
     method: 'get',
     url: '/member/order/view',
-    params
+    data
   })
 }
 
@@ -171,7 +171,7 @@ export function getOrderDetail (id) {
   return request({
     method: 'get',
     url: '/member/order/view',
-    params: { id }
+    data: { id }
   })
 }
 
@@ -180,7 +180,7 @@ export function deleteOrder (id) {
   return request({
     method: 'delete',
     url: '/member/order/delete',
-    params: { id }
+    data: { id }
   })
 }
 
@@ -189,16 +189,16 @@ export function closeOrder (id) {
   return request({
     method: 'get',
     url: '/member/order/close',
-    params: { id }
+    data: { id }
   })
 }
 
 // 订单列表
-export function getOrder (params) {
+export function getOrder (data) {
   return request({
     method: 'get',
     url: '/member/order/index',
-    params
+    data
   })
 }
 
@@ -207,7 +207,7 @@ export function deliveryOrder (id) {
   return request({
     method: 'get',
     url: '/member/order/take-delivery',
-    params: { id }
+    data: { id }
   })
 }
 
@@ -237,7 +237,7 @@ export function updateAddress (data) {
     method: 'put',
     url: '/member/address/update',
     data,
-    params:{ id: data.id }
+    data:{ id: data.id }
   })
 }
 
@@ -246,7 +246,7 @@ export function deleteAddress (id) {
   return request({
     method: 'delete',
     url: '/member/address/delete',
-    params: { id }
+    data: { id }
   })
 }
 
@@ -263,7 +263,7 @@ export function getAddressDetail (id) {
   return request({
     method: 'get',
     url: '/member/address/view',
-    params: { id }
+    data: { id }
   })
 }
 
@@ -280,7 +280,7 @@ export function updateUser (data) {
   return request({
     method: 'put',
     url: '/member/member/update',
-    params: { id: data.id },
+    data: { id: data.id },
     data
   })
 }
@@ -299,16 +299,16 @@ export function deleteCollect (id) {
   return request({
     method: 'delete',
     url: '/common/collect/delete',
-    params: { id }
+    data: { id }
   })
 }
 
 // 收藏列表
-export function getCollection (params) {
+export function getCollection (data) {
   return request({
     method: 'get',
     url: '/member/collect/index',
-    params
+    data
   })
 }
 

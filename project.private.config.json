@@ -23,6 +23,30 @@
           "pathName": "pages/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "分类",
+          "pathName": "pages/category/category",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "搜索列表",
+          "pathName": "pages/goodsList/goodsList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品详情",
+          "pathName": "pages/goodsDetail/goodsDetail",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "购物车",
+          "pathName": "pages/cart/cart",
+          "query": "",
+          "scene": null
         }
       ]
     }

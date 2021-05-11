@@ -1,2 +1,59 @@
-<!--pages/goodsList/goodsList.wxml-->
-<text>pages/goodsList/goodsList.wxml</text>
+<view class="goods-search" hidden="{{isHidden}}">
+  <van-search
+    value="{{ keyword }}"
+    label="商品"
+    placeholder="请输入搜索关键词"
+    use-action-slot
+    bind:change="onChange"
+    bind:search="onSearch"
+  >
+    <view slot="action" bind:tap="onSearch">搜索</view>
+  </van-search>
+  <view class="block">
+    <view class="title">最近搜索</view>
+    <view class="list">
+      <text wx:for="{{history}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+  <view class="block">
+    <view class="title">热门搜索</view>
+    <view class="list">
+      <text class="{{index>2?'':'red'}}" wx:for="{{hotSearch}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="goods-sort">
+  <van-search
+    value="{{ keyword }}"
+    label="商品"
+    placeholder="请输入搜索关键词"
+    use-action-slot
+    bind:focus="onShowSearch"
+  />
+  <view class="sort">
+    <view>
+      <van-dropdown-menu>
+        <van-dropdown-item value="{{ selectType }}" options="{{ select }}" />
+      </van-dropdown-menu>
+    </view>
+    <view>销量</view>
+    <view>最热</view>
+    <view>筛选</view>
+  </view>
+</view>
+
+<view class="goods-list">
+  <goods
+    wx:for="{{goodsList}}"
+    wx:key="id"
+    name="{{item.name}}"
+    pic="{{item.picture}}"
+    price="{{item.price}}"
+  >
+    <view slot="m">{{item.sketch}}</view>
+    <view slot="br">已售: {{item.total_sales}}</view>
+  </goods>
+</view>
+
+<view class="nomore" hidden="{{nextPage}}">没有更多了~</view>

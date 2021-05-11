@@ -1,6 +1,12 @@
 .search-bar{
-  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
   box-sizing: inherit;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+  z-index: 9;
   .input{
     display: flex;
     align-items: center;
@@ -15,14 +21,14 @@
   van-icon{
     position: absolute;
     left: 80rpx;
-    bottom: 10rpx;
+    bottom: 30rpx;
     font-size: 40rpx;
     color: #ccc;
   }
 }
 
 .index-swiper{
-  margin-top: 20rpx;
+  margin-top: 120rpx;
   height: 340rpx;
   image{
     width: 100%;
@@ -33,7 +39,7 @@
 .index-nav{
   display: flex;
   padding: 40rpx 0;
-  view{
+  navigator{
     flex:1;
     display: flex;
     flex-direction: column;
@@ -63,6 +69,24 @@
     van-icon{
       position: relative;
       top: 2rpx;
+    }
+  }
+}
+
+.index-block{
+  padding: 40rpx 0;
+  .title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 32rpx;
+  }
+  .list{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 12rpx;
+    >view{
+      width: 50%;
+      padding: 32rpx 16rpx;
     }
   }
 }

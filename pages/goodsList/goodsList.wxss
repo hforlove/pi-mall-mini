@@ -1,1 +1,50 @@
-/* pages/goodsList/goodsList.wxss */
+.goods-search {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+.goods-search .block {
+  padding: 20rpx 40rpx;
+}
+.goods-search .block .title {
+  padding-bottom: 20rpx;
+}
+.goods-search .block .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.goods-search .block .list text {
+  margin: 0 32rpx 10rpx 20rpx;
+  font-size: 24rpx;
+}
+.goods-sort {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  padding-bottom: 20rpx;
+}
+.goods-sort .sort {
+  display: flex;
+}
+.goods-sort .sort > view {
+  flex: 1;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goods-sort .van-dropdown-menu {
+  height: 60rpx;
+  background: none;
+  box-shadow: none;
+}
+.goods-list {
+  padding-top: 160rpx;
+}

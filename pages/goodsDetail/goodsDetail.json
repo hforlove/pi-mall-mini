@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "sku": "/components/Sku/Sku"
+  },
+  "navigationBarTitleText": "商品详情"
 }

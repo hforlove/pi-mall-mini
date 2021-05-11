@@ -1,6 +1,12 @@
 .search-bar {
-  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
   box-sizing: inherit;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+  z-index: 9;
 }
 .search-bar .input {
   display: flex;
@@ -16,12 +22,12 @@
 .search-bar van-icon {
   position: absolute;
   left: 80rpx;
-  bottom: 10rpx;
+  bottom: 30rpx;
   font-size: 40rpx;
   color: #ccc;
 }
 .index-swiper {
-  margin-top: 20rpx;
+  margin-top: 120rpx;
   height: 340rpx;
 }
 .index-swiper image {
@@ -32,18 +38,18 @@
   display: flex;
   padding: 40rpx 0;
 }
-.index-nav view {
+.index-nav navigator {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.index-nav view image {
+.index-nav navigator image {
   width: 100rpx;
   height: 100rpx;
 }
-.index-nav view text {
+.index-nav navigator text {
   font-size: 24rpx;
 }
 .index-notice {
@@ -60,4 +66,21 @@
 .index-notice swiper-item van-icon {
   position: relative;
   top: 2rpx;
+}
+.index-block {
+  padding: 40rpx 0;
+}
+.index-block .title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.index-block .list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 12rpx;
+}
+.index-block .list > view {
+  width: 50%;
+  padding: 32rpx 16rpx;
 }

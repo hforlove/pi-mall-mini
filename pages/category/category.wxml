@@ -1,1 +1,49 @@
-<view>category</view>
+<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
+
+<view class="category">
+
+  <view class="left">
+    <scroll-view scroll-y enhanced show-scrollbar="{{false}}">
+      <view class="box">
+        <text
+          wx:for="{{parentList}}"
+          wx:key="id"
+          class="{{index==active?'red':''}}"
+          bindtap="changeCate"
+          data-active="{{index}}"
+        >
+          {{item.title}}
+        </text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="right">
+    <scroll-view scroll-y enhanced show-scrollbar="{{false}}">
+      <view class="box">
+
+        <view class="block" wx:for="{{childList}}" wx:key="id">
+          <van-cell
+            title="{{item.title}}"
+            is-link
+            link-type="navigateTo"
+            url="/pages/goodsList/goodsList?id={{item.id}}"
+          />
+          <view class="items">
+            <navigator
+              class="item"
+              wx:for="{{item.child}}"
+              wx:key="id"
+              wx:for-item="child"
+              url="/pages/goodsList/goodsList?id={{child.id}}"
+            >
+              <image src="{{utils.realSrc(child.cover)}}" />
+              <text>{{child.title}}</text>
+            </navigator>
+          </view>
+        </view>
+
+      </view>
+    </scroll-view>
+  </view>
+</view>

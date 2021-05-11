@@ -1,0 +1,55 @@
+<view class="goods-sku">
+    <view class="close" bindtap="onClose">
+      <van-icon name="cross" />
+    </view>
+    <view class="top">
+      <image class="img" src="{{pic}}" />
+      <view class="info">
+        <view class="price">￥{{price}}</view>
+        <view class="stock">剩余{{stock}}件</view>
+        <view class="tips" wx:if="{{selectText}}">
+          已选 
+          <text class="type">{{selectText}}</text>
+        </view>
+        <view class="tips" wx:else>
+          请选择 
+          <text
+            class="type"
+            hidden="{{item.active}}"
+            wx:for="{{attrs}}"
+            wx:key="id"
+          >{{item.title}}{{item.active}}</text>
+        </view>
+      </view>
+    </view>
+    <view
+      class="option"
+      wx:for="{{attrs}}"
+      wx:key="id"
+    >
+      <view class="title">{{item.title}}</view>
+      <view class="list">
+        <text
+          class="{{'item '+ (child.active?'act':'')+(child.disabled?'disabled':'')}}"
+          wx:for="{{item.value}}"
+          wx:key="base_spec_value_id"
+          wx:for-item="child"
+          wx:for-index="cIndex"
+          data-parent="{{index}}"
+          data-child="{{cIndex}}"
+          data-item="{{child}}"
+          bindtap="onSelectOption"
+        >{{child.title}}</text>
+      </view>
+    </view>
+    <view class="count">
+      <view>购买数量</view>
+      <view>
+        <van-stepper value="{{ num }}" bind:change="onChangeNum" />
+      </view>
+    </view>
+    <view class="bar">
+      <view class="btn join" bindtap="onSubmit" data-type="cart">加入购物车</view>
+      <view class="btn buy" bindtap="onSubmit" data-type="buy">立即购买</view>
+    </view>
+  </view>

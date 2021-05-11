@@ -15,10 +15,10 @@
 
 <!-- 中间导航 -->
 <view class="index-nav">
-  <view wx:for="{{navList}}" wx:key="id">
+  <navigator wx:for="{{navList}}" wx:key="id" url="/pages/goodsList/goodsList?id={{item.id}}">
     <image src="{{utils.realSrc(item.cover)}}" />
     <text>{{item.title}}</text>
-  </view>
+  </navigator>
 </view>
 
 <!-- 流动通知 -->
@@ -30,3 +30,32 @@
     </view>
   </swiper-item>
 </swiper>
+
+<!-- 首页商品 -->
+<view class="index-block">
+  <view class="title red">新品</view>
+  <view class="list">
+    <view wx:for="{{newList}}" wx:key="id">
+      <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
+    </view>
+  </view>
+</view>
+
+<view class="index-block">
+  <view class="title red">热门</view>
+  <view class="list">
+    <view wx:for="{{hotList}}" wx:key="id">
+      <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
+    </view>
+  </view>
+</view>
+
+<view class="index-block">
+  <view class="title red">推荐</view>
+  <view class="list">
+    <view wx:for="{{recommenList}}" wx:key="id">
+      <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
+    </view>
+  </view>
+</view>
+<view class="padding-bottom"></view>

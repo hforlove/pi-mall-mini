@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "goods-item": "/components/GoodsItem/GoodsItem"
+  },
   "navigationBarTitleText": "PI商城",
   "navigationStyle": "custom"
 }

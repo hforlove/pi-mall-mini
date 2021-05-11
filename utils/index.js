@@ -13,10 +13,14 @@ export function getStore(key) {
   return wx.getStorageSync(key)
 }
 
-export function redirectTo(url,flag=true) {
+export function redirectTo(url,flag = true) {
   if(flag){
     wx.navigateTo({url})
   }else{
     wx.redirectTo({url})
   }
+}
+
+export function switchTab(url) {
+  wx.switchTab({url})
 }

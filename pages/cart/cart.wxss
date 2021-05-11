@@ -1,1 +1,25 @@
-/* pages/cart/cart.wxss */
+.cart-row {
+  display: flex;
+}
+.cart-row .check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60rpx;
+  padding-left: 20rpx;
+}
+.cart-row .detail {
+  flex: 1;
+}
+.del-btn {
+  height: 100%;
+}
+.del-btn van-button {
+  height: 100%;
+}
+.del-btn .van-button {
+  height: 100%;
+}
+.van-submit-bar {
+  bottom: 100rpx !important;
+}

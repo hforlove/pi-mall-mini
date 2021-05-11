@@ -45,7 +45,7 @@ Page({
     login({ mobile, password }).then(res=>{
       T.toast('登陆成功')
       T.setStore('token', res.data.access_token)
-      T.redirectTo('/pages/index/index',false)
+      T.switchTab('/pages/index/index',false)
     })
   }
 })

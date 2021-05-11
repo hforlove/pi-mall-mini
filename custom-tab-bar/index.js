@@ -2,6 +2,7 @@
 Component({
   data: {
     active: 'index',
+    cart: 0,
     lists: {
       index: '/pages/index/index',
       category: '/pages/category/category',
