@@ -1,0 +1,64 @@
+<view class="address-form">
+  <view class="rows">
+    <view class="l">姓名</view>
+    <view class=".r">
+      <van-field
+        model:value="{{ realname }}"
+        placeholder="收货人姓名"
+      />
+    </view>
+  </view>
+  <view class="rows">
+    <view class="l">电话</view>
+    <view class=".r">
+      <van-field
+        model:value="{{ mobile }}"
+        placeholder="收货人手机号"
+      />
+    </view>
+  </view>
+  <view class="rows">
+    <view class="l">地区</view>
+    <view class=".r">
+      <van-field
+        model:value="{{ area }}"
+        placeholder="选择省/市/区"
+        readonly
+        is-link
+        bind:click-input="onPopupShow"
+      />
+    </view>
+  </view>
+  <view class="rows">
+    <view class="l">详细地址</view>
+    <view class=".r">
+      <van-field
+        model:value="{{ address_details }}"
+        placeholder="街道门牌、楼层房间号等信息"
+      />
+    </view>
+  </view>
+  <view class="default">
+    <text>设为默认收货地址</text>
+    <switch checked="{{ is_default }}" bindchange="onChange" />
+  </view>
+</view>
+
+<view class="address-save">
+  <van-button type="danger" block round bindtap="onSave">保存</van-button>
+  <view hidden="{{!id}}"><van-button block bindtap="onDelete">删除</van-button></view>
+</view>
+
+<van-popup
+  show="{{ areaShow }}"
+  round
+  position="bottom"
+  bind:close="onPopupClose"
+>
+  <van-area
+    area-list="{{ areaList }}"
+    value="{{area_id}}"
+    bind:cancel="onPopupClose"
+    bind:confirm="onSelectArea"
+  />
+</van-popup>

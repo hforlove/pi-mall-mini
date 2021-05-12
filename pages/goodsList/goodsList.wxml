@@ -50,6 +50,8 @@
     name="{{item.name}}"
     pic="{{item.picture}}"
     price="{{item.price}}"
+    data-id="{{item.id}}"
+    bindtap="toOrderPage"
   >
     <view slot="m">{{item.sketch}}</view>
     <view slot="br">已售: {{item.total_sales}}</view>

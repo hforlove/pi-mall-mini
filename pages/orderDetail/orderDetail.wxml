@@ -1,0 +1,50 @@
+<view class="order-address">
+  <view class="l"><van-icon name="location-o" /></view>
+  <view class="m">
+    <view class="info">{{order.receiver_name}}  {{order.receiver_mobile}}</view>
+    <view class="gray">{{order.receiver_region_name}} {{order.receiver_address}}</view>
+  </view>
+</view>
+
+<view class="order-list">
+  <goods
+    wx:for="{{order.product}}"
+    wx:key="id"
+    name="{{item.product_name}}"
+    price="{{item.price}}"
+    pic="{{item.product_picture}}"
+  >
+    <view slot="m">{{item.sku_name}}</view>
+    <view slot="br">x{{item.num}}</view>
+  </goods>
+</view>
+
+<view class="order-steps">
+  <van-steps
+    active-icon="success"
+    inactive-icon="arrow"
+    steps="{{steps}}"
+    active="{{active}}"
+  />
+</view>
+
+<view class="info-row">
+    <text>订单状态</text>
+    <text class="red">{{orderStatus[order.order_status]}}</text>
+  </view>
+  <view class="info-row">
+    <text>订单号</text>
+    <text>{{order.order_sn}}</text>
+  </view>
+  <view class="info-row">
+    <text>配送方式</text>
+    <text class="red">{{order.shipping_explain}}</text>
+  </view>
+  <view class="info-row">
+    <text>支付方式</text>
+    <text class="red">{{order.payment_explain}}</text>
+  </view>
+  <view class="info-row">
+    <text>实付金额</text>
+    <text class="red">￥{{order.pay_money}}</text>
+  </view>

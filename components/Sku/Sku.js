@@ -28,9 +28,13 @@ Component({
         stock: sku.stock,
         attrs: sku.base_attribute_format,
       })
-      this.skuList = sku.sku
-      this.selected = new Array(this.data.attrs.length)
-      this.selected.fill('')
+      if(this.data.attrs.length){
+        this.skuList = sku.sku
+        this.selected = new Array(this.data.attrs.length)
+        this.selected.fill('')
+      }else{
+        this.sku_id = sku.sku[0].id
+      }
     }
   },
   methods: {
@@ -43,7 +47,7 @@ Component({
       })
     },
     onSubmit(ev){
-      if(!this.data.selectText){
+      if(!this.data.selectText && this.data.attrs.length){
         T.toast('请选择商品规格','error')
         return
       }

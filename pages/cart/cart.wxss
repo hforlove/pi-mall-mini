@@ -1,3 +1,6 @@
+.cart {
+  padding-bottom: 240rpx;
+}
 .cart-row {
   display: flex;
 }
@@ -22,4 +25,7 @@
 }
 .van-submit-bar {
   bottom: 100rpx !important;
+}
+.all-text {
+  padding-left: 12rpx;
 }

@@ -1,0 +1,32 @@
+.address-form {
+  padding: 48rpx;
+}
+.address-form .rows {
+  display: flex;
+  padding: 8rpx 0;
+}
+.address-form .rows > view {
+  display: flex;
+  align-items: center;
+}
+.address-form .rows .l {
+  width: 120rpx;
+}
+.address-form .rows .r {
+  flex: 1;
+}
+.address-form .rows .r van-field {
+  width: 100%;
+}
+.address-form .default {
+  padding: 12rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.address-form switch {
+  transform: scale(0.7);
+}
+.address-save {
+  padding: 0 32rpx;
+}

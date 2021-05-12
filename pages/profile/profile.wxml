@@ -1,2 +1,47 @@
-<!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="profile-bar">
+  <image class="head" src="{{head_portrait}}" />
+  <text class="name">{{nickname}}</text>
+</view>
+
+<view class="profile-item">
+  <van-cell title="我的账户" icon="card" />
+  <view class="account">
+    <view>
+      <text class="red">{{account.user_money}}</text>
+      <text>余额</text>
+    </view>
+    <view>
+      <text class="red">{{coupon_num}}</text>
+      <text>优惠券</text>
+    </view>
+    <view>
+      <text class="red">{{account.user_integral}}</text>
+      <text>积分</text>
+    </view>
+  </view>
+</view>
+
+<view class="profile-item">
+  <van-cell title="全部订单" is-link icon="balance-list" url="/pages/order/order"/>
+  <view class="cont">
+    <van-grid column-num="5">
+      <van-grid-item icon="balance-pay" badge="{{orderNum['0']*1}}" text="待付款" url="/pages/order/order?state=0" />
+      <van-grid-item icon="logistics" badge="{{orderNum['1']*1}}" text="待发货" url="/pages/order/order?state=1" />
+      <van-grid-item icon="completed" badge="{{orderNum['2']*1}}" text="待收货" url="/pages/order/order?state=2" />
+      <van-grid-item icon="flower-o" badge="{{orderNum['3']*1}}" text="评价" url="/pages/order/order?state=3" />
+      <van-grid-item icon="after-sale" badge="{{orderNum['-1']*1}}" text="售后"/>
+    </van-grid>
+  </view>
+</view>
+
+<view class="profile-item">
+  <van-cell title="我的服务" icon="service" />
+  <view class="cont">
+    <van-grid column-num="4">
+      <van-grid-item icon="star-o" text="我的收藏" url="/pages/collect/collect" />
+      <van-grid-item icon="coupon-o" text="领劵中心" />
+      <van-grid-item icon="location-o" text="地址管理" url="/pages/address/address" />
+      <van-grid-item icon="peer-pay" text="退出" bind:click="logout" />
+    </van-grid>
+  </view>
+</view>

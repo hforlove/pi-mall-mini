@@ -11,8 +11,8 @@
 <view class="goods-info">
   <view class="title">
     <text class="l">{{detail.name}}</text>
-    <view class="r gray">
-      <van-icon size="18" name="star-o" />
+    <view class="{{'r '+(detail.myCollect?'red':'gray')}}" bindtap="onCollect">
+      <van-icon size="18" name="{{'star'+(detail.myCollect?'':'-o')}}" />
       收藏
     </view>
   </view>

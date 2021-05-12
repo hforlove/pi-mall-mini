@@ -25,3 +25,8 @@ navigator {
 .navigator-hover {
   background: none;
 }
+.van-cell::after,
+.van-grid-item__content::after,
+.van-hairline--top::after {
+  border: none !important;
+}

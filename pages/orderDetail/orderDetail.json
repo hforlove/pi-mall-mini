@@ -2,5 +2,5 @@
   "usingComponents": {
     "goods": "/components/Goods/Goods"
   },
-  "navigationBarTitleText": "我的订单"
+  "navigationBarTitleText": "订单详情"
 }

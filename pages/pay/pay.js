@@ -1,66 +1,60 @@
-// pages/pay/pay.js
+
+import { getOrderByPay, payOrder } from '../../utils/api'
+import { toast } from '../../utils/index'
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    payType: 5,
+    pay_money: 0,
+    payInfo: {}
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad({id}){
+    this.id = id
+    this.getOrder(id)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onSwitch(ev){
+    this.setData({
+      payType: ev.target.dataset.name
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onSubmit(){
+    if(this.data.payType == 1 ){
+      toast('暂不支持','error')
+      return
+    }
+    const params = {
+      data: `{"order_id": ${this.id}}`,
+      order_group: 'order',
+      pay_type: this.data.payType,
+      trade_type: 'js'
+    }
+    this.payOrder(params)
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  /*
+  **  api相关方法
+  */
+  getOrder(id){
+    getOrderByPay({simplify:1, id}).then(res=>{
+      this.setData({
+        pay_money: res.data.pay_money,
+        payInfo: res.data
+      })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  payOrder(params){
+    payOrder(params).then(res=>{
+      toast('支付成功')
+      setTimeout(_=>{
+        wx.switchTab({
+          url: '/pages/profile/profile',
+        })
+      },2000)
+    })
   }
+
 })

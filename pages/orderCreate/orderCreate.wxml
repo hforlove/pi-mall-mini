@@ -1,0 +1,27 @@
+<view class="order-address" bindtap="toOrderPage">
+  <view class="l"><van-icon name="location-o" /></view>
+  <view class="m" wx:if="{{address.id}}">
+    <view class="info">{{address.realname}}  {{address.mobile}}</view>
+    <view class="gray">{{address.address_name}} {{address.address_details}}</view>
+  </view>
+  <view class="m" wx:else>请选择收货地址</view>
+  <view class="r"><van-icon name="arrow" /></view>
+</view>
+<view class="order-list">
+  <goods
+    wx:for="{{orderList}}"
+    wx:key="id"
+    name="{{item.product_name}}"
+    price="{{item.price}}"
+    pic="{{item.product_picture}}"
+  >
+    <view slot="m">{{item.sku_name}}</view>
+    <view slot="br">x{{item.num}}</view>
+  </goods>
+</view>
+
+<van-submit-bar
+  price="{{ totalPrice }}"
+  button-text="提交订单"
+  bind:submit="onSubmit"
+/>

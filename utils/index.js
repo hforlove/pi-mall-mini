@@ -13,6 +13,10 @@ export function getStore(key) {
   return wx.getStorageSync(key)
 }
 
+export function removeStore(key){
+  wx.removeStorageSync(key)
+}
+
 export function redirectTo(url,flag = true) {
   if(flag){
     wx.navigateTo({url})

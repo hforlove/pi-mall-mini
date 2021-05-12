@@ -1,5 +1,5 @@
-import { getGoodsDetail, addCart, getCartNum } from '../../utils/api'
-import { getStore, setStore, switchTab } from '../../utils/index'
+import { getGoodsDetail, addCart, getCartNum, createCollect, deleteCollect } from '../../utils/api'
+import { getStore, setStore, toast } from '../../utils/index'
 
 Page({
 
@@ -11,19 +11,15 @@ Page({
     cartNum: 0
   },
 
-  onLoad(payload){
-    const id = payload.id
-    getGoodsDetail(id).then(res=>{
-      res.data.intro = res.data.intro.replace('<img ', '<img style="width:100%;" ')
-      this.setData({
-        detail: res.data,
-        cartNum: getStore('cart')
-      })
-    })
+  onLoad({id}){
+    this._id = id
+    this.getGoods()
   },
 
   toCart(){
-    switchTab('/pages/cart/cart')
+    wx.switchTab({
+      url: '/pages/cart/cart',
+    })
   },
   onshowPopup(ev){
     const { type } = ev.currentTarget.dataset
@@ -38,6 +34,14 @@ Page({
     })
   },
 
+  onCollect(ev){
+    if(this.data.detail.myCollect){
+      this.deleteCollect(this.detai)
+    }else{
+      this.createCollect()
+    }
+  },
+
   onSubmit(ev){
     this.setData({
       popupOption: false
@@ -47,12 +51,24 @@ Page({
       sku_id,
       num
     }
-    if(type == 'cart'){
-      this.addCart(params)
+    if(type == 'cart') this.addCart(params)
+    if(type == 'buy'){
+      wx.navigateTo({
+        url: `/pages/orderCreate/orderCreate?type=buy_now&ids=${sku_id}&num=${num}`,
+      })
     }
   },
 
   // api相关方法
+  getGoods(){
+    getGoodsDetail(this._id).then(res=>{
+      res.data.intro = res.data.intro.replace('<img ', '<img style="width:100%;" ')
+      this.setData({
+        detail: res.data,
+        cartNum: getStore('cart')
+      })
+    })
+  },
   addCart(params){
     addCart(params).then(res=>{
       getCartNum().then(res=>{
@@ -60,6 +76,25 @@ Page({
         this.setData({
           cartNum: res.data
         })
+      })
+    })
+  },
+  createCollect(){
+    const params = {
+      topic_id: this._id,
+      topic_type: "product"
+    }
+    createCollect(params).then(res=>{
+      toast('已收藏')
+      this.setData({
+        'detail.myCollect': res.data
+      })
+    })
+  },
+  deleteCollect(){
+    deleteCollect(this.data.detail.myCollect.id).then(res=>{
+      this.setData({
+        'detail.myCollect': null
       })
     })
   }

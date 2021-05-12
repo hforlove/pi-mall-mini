@@ -1,2 +1,21 @@
-<!--pages/address/address.wxml-->
-<text>pages/address/address.wxml</text>
+<view class="address-list">
+  <view class="rows" wx:for="{{addressList}}" wx:key="id">
+    <view class="l" data-address="{{item}}" bindtap="onSelect">
+      <van-checkbox value="{{ item.checked }}" />
+    </view>
+    <view class="m" data-address="{{item}}" bindtap="onSelect">
+      <view class="info">
+        {{item.realname}} {{item.mobile}}
+        <van-tag wx:if="{{item.is_default==1}}" type="danger">默认</van-tag>
+      </view>
+      <view class="address">{{item.address_name}} {{item.address_details}}</view>
+    </view>
+    <view class="r" bindtap="toOrderPage" data-id="{{item.id}}">
+      <van-icon size="38rpx" name="edit" />
+    </view>
+  </view>
+</view>
+
+<view class="address-add">
+  <van-button type="danger" block round bindtap="toOrderPage">新增地址</van-button>
+</view>

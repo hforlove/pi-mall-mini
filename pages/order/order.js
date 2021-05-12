@@ -1,66 +1,121 @@
-// pages/order/order.js
+
+import { getOrder, deleteOrder, closeOrder, deliveryOrder } from '../../utils/api'
+import { orderStatus } from '../../utils/config'
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    state: '-1',
+    orderList: [],
+    orderStatus,
+    page: 1,
+    nextPage: true,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad({state}){
+    if(state){
+      this.setData({
+        state
+      })
+    }else{
+      this.getOrder()
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onReachBottom(){
+    console.log('loadmore');
+    if(!this.data.nextPage) return
+    this.setData({
+      page: this.data.page + 1
+    })
+    this.getOrder()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  toOrderPage(ev){
+    const { id } = ev.target.dataset
+    wx.navigateTo({
+      url: `/pages/orderDetail/orderDetail?id=${id}`,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onChange(ev){
+    console.log('change');
+    this.setData({
+      state: ev.detail.name
+    })
+    this.resetParams()
+    this.getOrder()
+  },
+  resetParams(){
+    this.setData({
+      orderList: [],
+      page: 1,
+      nextPage: true
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onDelete(ev){
+    const { id } = ev.target.dataset
+    this.deleteOrder(id)
+  },
+  onReceive(ev){
+    const { id } = ev.target.dataset
+    this.deliveryOrder(id)
+  },
+  onCancel(ev){
+    const { id } = ev.target.dataset
+    this.closeOrder(id)
+  },
+  onPay(ev){
+    const { id } = ev.target.dataset
+    wx.navigateTo({
+      url: `/pages/pay/pay?id=${id}`,
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  /*
+  **  api相关
+  */
+  getOrder(){
+    console.log('data');
+    const { page, state } = this.data
+    const params = {
+      synthesize_status: state > -1 ? state : '',
+      page
+    }
+    getOrder(params).then(res=>{
+      this.setData({
+        orderList: [...this.data.orderList, ...res.data]
+      })
+      if(res.data.length < 10){
+        this.setData({
+          nextPage: false
+        })
+      }
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  deleteOrder(id){
+    deleteOrder(id).then(res=>{
+      const orderList = this.data.orderList
+      const index = orderList.findIndex(item=>item.id == id)
+      orderList.splice(index,1)
+      this.setData({orderList})
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  deliveryOrder(id){
+    deliveryOrder(id).then(res=>{
+      const orderList = this.data.orderList
+      const index = orderList.findIndex(item=>item.id == id)
+      orderList[index].order_status = 3
+      this.setData({orderList})
+    })
+  },
+  closeOrder(id){
+    closeOrder(id).then(res=>{
+      const orderList = this.data.orderList
+      const index = orderList.findIndex(item=>item.id == id)
+      orderList[index].order_status = 4
+      this.setData({orderList})
+    })
   }
 })

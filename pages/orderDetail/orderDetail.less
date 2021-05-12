@@ -1,0 +1,44 @@
+.order-address{
+  padding: 32rpx 32rpx 40rpx;
+  display: flex;
+  position: relative;
+  margin-bottom: 40rpx;
+  &:before{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: -webkit-repeating-linear-gradient(135deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
+    background: repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
+    background-size: 80px;
+    content: '';
+  }
+  >view{
+    display: flex;
+    align-items: center;
+  }
+  .m{
+    flex: 1;
+    padding: 0 20rpx 0 40rpx;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gray{
+    padding-top: 12rpx;
+  }
+}
+
+.order-list{
+  padding: 20rpx;
+}
+
+.order-steps{
+  padding: 0 32rpx;
+}
+.info-row{
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 40rpx;
+  color: gray;
+}

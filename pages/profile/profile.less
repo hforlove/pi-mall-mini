@@ -1,0 +1,64 @@
+.profile-bar{
+  position: relative;
+  height: 440rpx;
+  padding: 100rpx 40rpx 0;
+  display: flex;
+  align-items: center;
+  background: #e55039;
+  color: #fff;
+  &::before,&::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://pic.imgdb.cn/item/609b78cfd1a9ae528facc970.png');
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .head{
+    width: 124rpx;
+    height: 124rpx;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .name{
+    font-size: 48rpx;
+    padding: 0 20rpx;
+  }
+}
+
+.profile-item{
+  padding: 20rpx 0;
+  .van-cell__left-icon-wrap{
+    color: red;
+    font-size: 44rpx;
+  }
+  .van-grid-item__icon{
+    color: red;
+  }
+  .van-grid-item__text text{
+    font-size: 24rpx;
+  }
+  .account{
+    display: flex;
+    >view{
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    text{
+      font-size: 24rpx;
+    }
+    .red{
+      font-size: 28rpx;
+      padding-bottom: 4rpx;
+    }
+    .cont{
+      padding: 0 32rpx;
+    }
+  }
+}

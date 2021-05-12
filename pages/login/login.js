@@ -1,12 +1,12 @@
 import { sendSmsCode, register, login } from '../../utils/api'
-import * as T from '../../utils/index'
+import { setStore, toast } from '../../utils/index'
 
 Page({
   data: {
     active: 'login',
     nickname: '',
-    mobile: "",
-    password: '',
+    mobile: "13128542661",
+    password: '123123',
     code:''
   },
 
@@ -16,7 +16,7 @@ Page({
   },
   onSendCode(){
     if(!this.data.mobile){
-      T.toast('请输入手机号','error')
+      toast('请输入手机号','error')
       return
     }
     sendSmsCode(this.data.mobile).then(res=>{
@@ -29,7 +29,7 @@ Page({
     const { mobile, code, password, nickname } = this.data
     if(mobile && code && password && nickname){
       register({mobile, code, password, nickname}).then(res=>{
-        T.toast('注册成功')
+        toast('注册成功')
         this.setData({
           mobile: '',
           password: '',
@@ -37,15 +37,18 @@ Page({
         })
       })
     }else{
-      T.toast('请输入完整资料','error')
+      toast('请输入完整资料','error')
     }
   },
   onLogin(){
     const { mobile, password } = this.data
     login({ mobile, password }).then(res=>{
-      T.toast('登陆成功')
-      T.setStore('token', res.data.access_token)
-      T.switchTab('/pages/index/index',false)
+      toast('登陆成功')
+      setStore('token', res.data.access_token)
+      setStore('cart', res.data.member.cart_num)
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
     })
   }
 })

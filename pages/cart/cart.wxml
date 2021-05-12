@@ -41,11 +41,13 @@
   </van-swipe-cell>
 </view>
 
+<view hidden="{{cartList.length > 0}}"><van-empty description="空空如也" /></view>
+
 <van-submit-bar
   price="{{ price }}"
   button-text="提交订单"
   bind:submit="onSubmit"
 >
   <van-checkbox value="{{ allCheck }}" bind:change="onAllCheckChange" />
-  <text> 全选</text>
+  <text class="all-text">全选</text>
 </van-submit-bar>

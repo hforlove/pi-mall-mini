@@ -4,12 +4,9 @@ import { getCart, updateCart, deleteCart } from '../../utils/api'
  
 Page({
   data: {
-    allCheck: true,
+    allCheck: false,
     cartList: [],
     price: 0
-  },
-  onLoad(){
-    this.getCart()
   },
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -18,6 +15,7 @@ Page({
         cart: getStore('cart')
       })
     }
+    this.getCart()
   },
   
   onAllCheckChange(ev){ // 全选
@@ -47,6 +45,12 @@ Page({
     const { item } = ev.currentTarget.dataset
     this.deleteCart(item)
   },
+  onSubmit(){
+    const ids = this.data.cartList.filter(item=>item.checked).map(item=>item.id)
+    wx.navigateTo({
+      url: '/pages/orderCreate/orderCreate?type=cart&ids='+ids.join(',')
+    })
+  },
 
   getCurIndex(cart){  // 获取操作的一行的索引
     const data = this.data.cartList
@@ -73,7 +77,8 @@ Page({
       })
       this.setPrice(res.data)
       this.setData({
-        cartList: res.data
+        cartList: res.data,
+        allCheck: res.data.length > 0
       })
     })
   },

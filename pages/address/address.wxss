@@ -1,1 +1,29 @@
-/* pages/address/address.wxss */
+.address-list {
+  padding: 0 32rpx 120rpx;
+}
+.address-list .rows {
+  display: flex;
+  position: relative;
+  margin-bottom: 40rpx;
+}
+.address-list .rows > view {
+  display: flex;
+  align-items: center;
+}
+.address-list .rows .m {
+  padding: 0 20rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+.address-list .rows .address {
+  padding-top: 12rpx;
+}
+.address-add {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9;
+  padding: 36rpx;
+}

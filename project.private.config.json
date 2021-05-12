@@ -39,13 +39,55 @@
         {
           "name": "商品详情",
           "pathName": "pages/goodsDetail/goodsDetail",
-          "query": "id=1",
+          "query": "id=16",
           "scene": null
         },
         {
           "name": "购物车",
           "pathName": "pages/cart/cart",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单创建",
+          "pathName": "pages/orderCreate/orderCreate",
+          "query": "type=buy_now&ids=48&num=1",
+          "scene": null
+        },
+        {
+          "name": "收货地址",
+          "pathName": "pages/address/address",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "新增地址",
+          "pathName": "pages/addressEdit/addressEdit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "支付",
+          "pathName": "pages/pay/pay",
+          "query": "id=16",
+          "scene": null
+        },
+        {
+          "name": "个人中心",
+          "pathName": "pages/profile/profile",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的订单",
+          "pathName": "pages/order/order",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单详情",
+          "pathName": "pages/orderDetail/orderDetail",
+          "query": "id=17",
           "scene": null
         }
       ]

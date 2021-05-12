@@ -1,2 +1,82 @@
-<!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<view class="order-tabs">
+  <van-tabs active="{{ state }}" bind:change="onChange">
+    <van-tab title="全部" name="-1"></van-tab>
+    <van-tab title="待付款" name="0"></van-tab>
+    <van-tab title="待发货" name="1"></van-tab>
+    <van-tab title="待收货" name="2"></van-tab>
+    <van-tab title="评价" name="3"></van-tab>
+  </van-tabs>
+</view>
+
+<view class="order-main">
+  <view class="order-row" wx:for="{{orderList}}" wx:key="id">
+    <view class="top">
+      <text>订单号：{{item.order_sn}}</text>
+      <text class="red">{{orderStatus[item.order_status]}}</text>
+    </view>
+    <view class="list">
+      <goods
+        wx:for="{{item.product}}"
+        wx:key="id"
+        wx:for-item="child"
+        price="{{child.price}}"
+        pic="{{child.product_picture}}"
+        name="{{child.product_name}}"
+      >
+        <view slot="m">{{child.sku_name}}</view>
+        <view slot="br">x{{child.num}}</view>
+      </goods>
+    </view>
+    <view class="tips">
+      共<text> {{item.product_count}} </text>件商品 实付款 ￥<text>{{item.pay_money}}</text>
+    </view>
+    <view class="btn">
+      <van-button
+        wx:if="{{item.order_status == 0}}"
+        size="mini"
+        type="default"
+        data-id="{{item.id}}"
+        bind:click="onCancel"
+      >
+        取消订单
+      </van-button>
+      <van-button
+        wx:if="{{item.order_status == -4}}"
+        size="mini"
+        type="default"
+        data-id="{{item.id}}"
+        bind:click="onDelete"
+      >
+        删除订单
+      </van-button>
+      <van-button
+        size="mini" 
+        type="danger"
+        data-id="{{item.id}}"
+        bind:click="toOrderPage"
+      >
+        订单详情
+      </van-button>
+      <van-button
+        wx:if="{{item.order_status == 0 || item.order_status == 202}}"
+        size="mini" 
+        type="danger"
+        data-id="{{item.id}}"
+        bind:click="onPay"
+      >
+        立即支付
+      </van-button>
+      <van-button
+        wx:if="{{item.order_status == 2}}"
+        size="mini" 
+        type="danger"
+        data-id="{{item.id}}"
+        bind:click="onReceive"
+      >
+        确认收货
+      </van-button>
+    </view>
+  </view>
+</view>
+
+<view class="nomore" hidden="{{nextPage && orderList.length < 1}}">没有更多了~</view>

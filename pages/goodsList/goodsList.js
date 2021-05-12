@@ -36,6 +36,13 @@ Page({
     this.getGoodsList()
   },
 
+  toOrderPage(ev){
+    const { id } = ev.currentTarget.dataset
+    wx.navigateTo({
+      url: `/pages/goodsDetail/goodsDetail?id=${id}`,
+    })
+  },
+
   onChange(ev){
     this.setData({
       keyword: ev.detail

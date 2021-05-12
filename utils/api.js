@@ -179,8 +179,7 @@ export function getOrderDetail (id) {
 export function deleteOrder (id) {
   return request({
     method: 'delete',
-    url: '/member/order/delete',
-    data: { id }
+    url: `/member/order/delete?id=${id}`
   })
 }
 
@@ -235,9 +234,8 @@ export function createAddress (data) {
 export function updateAddress (data) {
   return request({
     method: 'put',
-    url: '/member/address/update',
-    data,
-    data:{ id: data.id }
+    url: `/member/address/update?id=${data.id}`,
+    data
   })
 }
 
@@ -245,8 +243,7 @@ export function updateAddress (data) {
 export function deleteAddress (id) {
   return request({
     method: 'delete',
-    url: '/member/address/delete',
-    data: { id }
+    url: `/member/address/delete?id=${id}`
   })
 }
 
@@ -298,8 +295,7 @@ export function createCollect (data) {
 export function deleteCollect (id) {
   return request({
     method: 'delete',
-    url: '/common/collect/delete',
-    data: { id }
+    url: `/common/collect/delete?id=${id}`
   })
 }
 
