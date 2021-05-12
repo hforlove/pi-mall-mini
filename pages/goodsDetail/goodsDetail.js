@@ -62,7 +62,8 @@ Page({
   // api相关方法
   getGoods(){
     getGoodsDetail(this._id).then(res=>{
-      res.data.intro = res.data.intro.replace('<img ', '<img style="width:100%;" ')
+      res.data.intro = res.data.intro.replace(/<img /g, '<img style="width:100%" ')
+      console.log(res.data.intro);
       this.setData({
         detail: res.data,
         cartNum: getStore('cart')
