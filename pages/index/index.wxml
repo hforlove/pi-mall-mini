@@ -1,22 +1,20 @@
-<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
-
 <!-- 自定义navigation -->
 <view class="search-bar" style="padding-top: {{barTop}}px; height: {{barHeight}}px">
   <van-icon name="search" />
-  <view class="input" style="border-radius: {{barHeight/2}}px">搜索商品</view>
+  <view class="input" style="border-radius: {{barHeight/2}}px" bindtap="toGoodsList">搜索商品</view>
 </view>
 
 <!-- 轮播图 -->
 <swiper class="index-swiper" autoplay indicator-dots circular>
   <swiper-item wx:for="{{swiperList}}" wx:key="id">
-    <image src="{{utils.realSrc(item.cover)}}" />
+    <image src="{{item.cover}}" />
   </swiper-item>
 </swiper>
 
 <!-- 中间导航 -->
 <view class="index-nav">
   <navigator wx:for="{{navList}}" wx:key="id" url="/pages/goodsList/goodsList?id={{item.id}}">
-    <image src="{{utils.realSrc(item.cover)}}" />
+    <image src="{{item.cover}}" />
     <text>{{item.title}}</text>
   </navigator>
 </view>
@@ -32,28 +30,28 @@
 </swiper>
 
 <!-- 首页商品 -->
-<view class="index-block">
+<view class="index-block" hidden="{{newList.length<1}}">
   <view class="title red">新品</view>
   <view class="list">
-    <view wx:for="{{newList}}" wx:key="id" data-id="{{item.id}}" bindtap="toOrderPage">
+    <view wx:for="{{newList}}" wx:key="id" data-id="{{item.id}}" bindtap="toGoods">
       <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
     </view>
   </view>
 </view>
 
-<view class="index-block">
+<view class="index-block" hidden="{{hotList.length<1}}">
   <view class="title red">热门</view>
   <view class="list">
-    <view wx:for="{{hotList}}" wx:key="id" data-id="{{item.id}}" bindtap="toOrderPage">
+    <view wx:for="{{hotList}}" wx:key="id" data-id="{{item.id}}" bindtap="toGoods">
       <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
     </view>
   </view>
 </view>
 
-<view class="index-block">
+<view class="index-block" hidden="{{recommenList.length<1}}">
   <view class="title red">推荐</view>
   <view class="list">
-    <view wx:for="{{recommenList}}" wx:key="id" data-id="{{item.id}}" bindtap="toOrderPage">
+    <view wx:for="{{recommenList}}" wx:key="id" data-id="{{item.id}}" bindtap="toGoods">
       <goods-item name="{{item.name}}" pic="{{item.picture}}" price="{{item.price}}" />
     </view>
   </view>

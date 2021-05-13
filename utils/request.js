@@ -3,6 +3,7 @@ import { host } from './config'
 import { getStore } from './index'
 
 function request (config){
+  wx.showLoading()
   return new Promise((reslove, reject) => {
     wx.request({
       url: `${host}/api/tiny-shop/v1${config.url}`,
@@ -32,6 +33,9 @@ function request (config){
       },
       fail: (err) => {
         reject(err)
+      },
+      complete: () => {
+        wx.hideLoading()
       }
     });
       

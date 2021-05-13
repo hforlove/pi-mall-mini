@@ -1,7 +1,0 @@
-var realSrc=function(src) {
-  return src ? src.replace('http://www.pride.demo.com', 'https://pridewu.cn1.utools.club') : ''
-}
-
-module.exports={
-  realSrc:realSrc
-}

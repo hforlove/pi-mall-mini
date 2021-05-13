@@ -1,11 +1,12 @@
 import { getGoodsList } from '../../utils/api'
+import { getStore } from '../../utils/index'
 
 Page({
   data: {
     keyword: '',
     page: 1,
     cate_id: '',
-    isHidden: true,
+    isHidden: false,
     history: [],
     hotSearch: [],
     selectType: 1,
@@ -17,21 +18,22 @@ Page({
     nextPage: true,
     goodsList: []
   },
-  onLoad(payload){
-    const cate_id = payload.id || ''
-    const history = wx.getStorageSync('history') || []
-    const hotSearch = wx.getStorageSync('hotSearch') || []
+  onLoad({id}){
+    const history = getStore('history') || []
+    const hotSearch = getStore('hotSearch') || []
     this.setData({
       history,
       hotSearch,
-      cate_id
+      cate_id: id,
+      isHidden: !!id
     })
     this.getGoodsList()
   },
   onReachBottom(){
-    if(!this.data.nextPage) return
+    const { page, nextPage } = this.data
+    if(!nextPage) return
     this.setData({
-      page: this.data.page + 1
+      page: page + 1
     })
     this.getGoodsList()
   },
@@ -53,13 +55,23 @@ Page({
       isHidden: false
     })
   },
+  onQuickSearch(ev){
+    const { key } = ev.currentTarget.dataset
+    this.setData({
+      keyword: key
+    })
+    this.setData({isHidden:true})
+    this.resetParams()
+    this.getGoodsList()
+  },
   onSearch(){
     const history = this.data.history
-    if(!this.data.keyword) return
-    if(!this.data.history.includes(this.data.keyword)){
-      history.unshift(this.data.keyword)
-      wx.setStorageSync('history', history)
-      this.setData({history})
+    if(this.data.keyword){
+      if(!this.data.history.includes(this.data.keyword)){
+        history.unshift(this.data.keyword)
+        wx.setStorageSync('history', history)
+        this.setData({history})
+      }
     }
     this.setData({isHidden:true})
     this.resetParams()

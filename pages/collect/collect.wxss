@@ -1,1 +1,9 @@
-/* pages/collect/collect.wxss */
+.del-btn {
+  height: 100%;
+}
+.del-btn van-button {
+  height: 100%;
+}
+.del-btn .van-button {
+  height: 100%;
+}

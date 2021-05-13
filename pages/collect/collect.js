@@ -1,66 +1,62 @@
-// pages/collect/collect.js
+
+import { getCollection, deleteCollect } from '../../utils/api'
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    collectList: [],
+    nextPage: true,
+    page: 1
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad(){
+    this.getCollect()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onReachBottom(){
+    const { page, nextPage } = this.data
+    if(!nextPage) return
+    this.setData({
+      page: page+1
+    })
+    this.getCollect()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  toGoods(ev){
+    const { id } = ev.currentTarget.dataset
+    wx.navigateTo({
+      url: `/pages/goodsDetail/goodsDetail?id=${id}`,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onDelete(ev){
+    const { id } = ev.currentTarget.dataset
+    this.deleteCollect(id)
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  /*
+  **  api
+  */
+  getCollect(){
+    const { collectList, page } = this.data
+    getCollection({page}).then(res=>{
+      this.setData({
+        collectList: [...collectList, ...res.data]
+      })
+      if(res.data.length<10){
+        this.setData({
+          nextPage: false,
+        })
+      }
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  deleteCollect(id){
+    deleteCollect(id).then(res=>{
+      const { collectList } = this.data
+      const index = collectList.findIndex(item=>item.id == id)
+      collectList.splice(index,1)
+      this.setData({collectList})
+    })
   }
+
 })

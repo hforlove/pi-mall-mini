@@ -41,7 +41,11 @@
   </van-swipe-cell>
 </view>
 
-<view hidden="{{cartList.length > 0}}"><van-empty description="空空如也" /></view>
+<view hidden="{{ !( cartList.length<1 && !first) }}">
+  <van-empty description="空空如也">
+    <navigator class="red" url="/pages/goodsList/goodsList">随便逛逛>></navigator>
+  </van-empty>
+</view>
 
 <van-submit-bar
   price="{{ price }}"

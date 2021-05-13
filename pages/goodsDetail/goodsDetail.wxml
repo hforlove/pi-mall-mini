@@ -1,9 +1,7 @@
-<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
-
 <!-- 轮播图 -->
 <swiper class="goods-swiper" autoplay indicator-dots circular>
   <swiper-item wx:for="{{detail.covers}}" wx:key="*this">
-    <image src="{{utils.realSrc(item)}}" />
+    <image src="{{item}}" />
   </swiper-item>
 </swiper>
 
@@ -48,7 +46,7 @@
     商品详情
   </van-divider>
   <view class="detail">
-    <rich-text nodes="{{utils.realSrc(detail.intro)}}"></rich-text>
+    <rich-text nodes="{{detail.intro}}"></rich-text>
   </view>
 </view>
 

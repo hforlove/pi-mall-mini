@@ -1,2 +1,25 @@
-<!--pages/collect/collect.wxml-->
-<text>pages/collect/collect.wxml</text>
+<view class="collect">
+  <van-swipe-cell 
+    wx:for="{{collectList}}"
+    wx:key="id" 
+    right-width="{{ 65 }}"
+  >
+    <goods
+      name="{{item.product.name}}"
+      pic="{{item.product.picture}}"
+      price="{{item.product.minPriceSku.price}}"
+      data-id="{{item.product.id}}"
+      bindtap="toGoods"
+    />
+    <view slot="right" class="del-btn">
+      <van-button
+        type="danger"
+        data-id="{{item.id}}"
+        bindtap="onDelete"
+      >
+        删除
+      </van-button>
+    </view>
+  </van-swipe-cell>
+</view>
+<view class="nomore" hidden="{{nextPage}}">没有更多了~</view>

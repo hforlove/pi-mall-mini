@@ -1,5 +1,3 @@
-<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
-
 <view class="category">
 
   <view class="left">
@@ -37,7 +35,7 @@
               wx:for-item="child"
               url="/pages/goodsList/goodsList?id={{child.id}}"
             >
-              <image src="{{utils.realSrc(child.cover)}}" />
+              <image src="{{child.cover}}" />
               <text>{{child.title}}</text>
             </navigator>
           </view>

@@ -29,8 +29,12 @@ Page({
       })
     }
   },
-
-  toOrderPage(ev){
+  toGoodsList(){
+    wx.navigateTo({
+      url: '/pages/goodsList/goodsList',
+    })
+  },
+  toGoods(ev){
     const { id } = ev.currentTarget.dataset
     wx.navigateTo({
       url: `/pages/goodsDetail/goodsDetail?id=${id}`,

@@ -1,11 +1,12 @@
 
-import { getStore, toast } from '../../utils/index'
+import { getStore, setStore, toast } from '../../utils/index'
 import { getCart, updateCart, deleteCart } from '../../utils/api'
  
 Page({
   data: {
     allCheck: false,
     cartList: [],
+    first: true,
     price: 0
   },
   onShow() {
@@ -78,7 +79,8 @@ Page({
       this.setPrice(res.data)
       this.setData({
         cartList: res.data,
-        allCheck: res.data.length > 0
+        allCheck: res.data.length > 0,
+        first: false
       })
     })
   },
@@ -102,11 +104,18 @@ Page({
       sku_ids: `[${cart.sku_id}]`
     }
     deleteCart(params).then(res=>{
-      const { data, index} = this.getCurIndex(cart)
+      const { data, index } = this.getCurIndex(cart)
+      const { allCheck } = this.data
+      const cartNum = getStore('cart') || 0
       data.splice(index,1)
       this.setPrice(data)
       this.setData({
-        cartList: data
+        cartList: data,
+        allCheck: cartNum-1==0 ? false: allCheck
+      })
+      setStore('cart', cartNum-1)
+      this.getTabBar().setData({
+        cart: cartNum-1
       })
     })
   }

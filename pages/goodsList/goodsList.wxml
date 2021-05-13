@@ -12,13 +12,28 @@
   <view class="block">
     <view class="title">最近搜索</view>
     <view class="list">
-      <text wx:for="{{history}}" wx:key="*this">{{item}}</text>
+      <text
+        wx:for="{{history}}"
+        wx:key="*this"
+        data-key="{{item}}"
+        bindtap="onQuickSearch"
+      >
+        {{item}}
+      </text>
     </view>
   </view>
   <view class="block">
     <view class="title">热门搜索</view>
     <view class="list">
-      <text class="{{index>2?'':'red'}}" wx:for="{{hotSearch}}" wx:key="*this">{{item}}</text>
+      <text
+        class="{{index>2?'':'red'}}"
+        wx:for="{{hotSearch}}"
+        wx:key="*this"
+        data-key="{{item}}"
+        bindtap="onQuickSearch"
+      >
+        {{item}}
+      </text>
     </view>
   </view>
 </view>

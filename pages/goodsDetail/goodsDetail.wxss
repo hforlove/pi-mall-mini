@@ -6,7 +6,7 @@
   height: 100%;
 }
 .goods-info {
-  padding: 20rpx 32rpx;
+  padding: 20rpx 32rpx 120rpx;
 }
 .goods-info .title {
   display: flex;
