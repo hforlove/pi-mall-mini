@@ -1,7 +1,5 @@
-<wxs module="utils" src="../../wxs/utils.wxs"></wxs>
-
 <view class="goods">
-  <image class="img" src="{{utils.realSrc(pic)}}" />
+  <image class="img" src="{{pic}}" />
   <text class="name">{{name}}</text>
   <text class="price">￥{{price}}</text>
 </view>
